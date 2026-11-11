@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siyer Kampları | Gönüllü Eğitim Platformu</title>
+    
+    <!-- Sosyal Medya & Önizleme Başlıkları -->
+    <meta name="title" content="Siyer Kampları Merkezi">
+    <meta name="description" content="İlmin ve Ahlakın İzinde: Siyer Kampları Gönüllü Platformu">
+    
+    <meta name="theme-color" content="#15381a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,700&family=Amiri:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- KOYU TEMA (VARSAYILAN: DERİN ZÜMRÜT & ALTIN) --- */
+        :root {
+            --bg-center: #234f29; 
+            --bg-edge: #08160c;   
+            --text-gold: #e5c178;
+            --text-light: #F8F1E5;
+            --card-bg: rgba(16, 40, 21, 0.88); 
+            --line-color: rgba(229, 193, 120, 0.45); 
+            --accent-main: #c8e6c9;
+            --modal-overlay: rgba(0, 0, 0, 0.85);
+            --heading-color: #ffffff;
+            --hadis-bg: radial-gradient(circle at 50% 15%, #133e21 0%, rgba(10, 32, 17, 0.98) 80%, #051409 100%);
+        }
+
+        /* --- AÇIK TEMA (FERAH FİLDİŞİ & KOYU ZÜMRÜT) --- */
+        [data-theme="light"] {
+            --bg-center: #ffffff; 
+            --bg-edge: #f3efe6;   
+            --text-gold: #9e7322;
+            --text-light: #122e18;
+            --card-bg: rgba(255, 255, 255, 0.92); 
+            --line-color: rgba(18, 46, 24, 0.25); 
+            --accent-main: #2b5f31;
+            --modal-overlay: rgba(18, 46, 24, 0.75);
+            --heading-color: #122e18;
+            --hadis-bg: radial-gradient(circle at 50% 15%, #ffffff 0%, #f9f6f0 80%, #efe9dd 100%);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease; }
+        
+        /* Mor link rengini engelleme */
+        a, a:visited, a:hover, a:active { color: inherit; text-decoration: none; outline: none; }
+
+        body { 
+            background-color: var(--bg-edge); 
+            color: var(--text-light); 
+            font-family: 'Lora', serif; 
+            line-height: 1.8; 
+            padding: 25px 15px 100px 15px; 
+            overflow-x: hidden; 
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* RADYAL DERİNLİK & DOKU */
+        body::before {
+            content: ""; position: fixed; inset: 0; z-index: -4;
+            background: radial-gradient(circle at 50% 20%, var(--bg-center) 0%, var(--bg-edge) 85%);
+        }
+        body::after {
+            content: ""; position: fixed; inset: 0; z-index: -3; pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+        }
+
+        /* GÜNEŞ IŞIKLARI (BOKEH) */
+        .bokeh {
+            position: fixed; border-radius: 50%; filter: blur(55px); z-index: -2;
+            animation: float 20s ease-in-out infinite alternate; opacity: 0.5; pointer-events: none;
+        }
+        .b1 { width: 400px; height: 400px; background: rgba(229, 193, 120, 0.1); top: -100px; left: 10%; }
+        .b2 { width: 500px; height: 500px; background: rgba(129, 199, 132, 0.08); top: 30%; right: -150px; animation-delay: -5s; }
+        .b3 { width: 350px; height: 350px; background: rgba(229, 193, 120, 0.08); bottom: -50px; left: 30%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 40px) scale(1.08); }
+            100% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* HAVADAN SÜZÜLEN YAPRAKLAR */
+        .garden-breeze { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .falling-leaf {
+            position: absolute; color: var(--accent-main); top: -10%; font-size: 1.5rem;
+            opacity: 0; animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.45; }
+            85% { opacity: 0.45; }
+            100% { transform: translate(120px, 110vh) rotate(360deg); opacity: 0; }
+        }
+        .fl-1 { left: 15%; font-size: 1.2rem; animation-duration: 16s; animation-delay: 1s; }
+        .fl-2 { left: 45%; font-size: 1.6rem; animation-duration: 19s; animation-delay: 4s; }
+        .fl-3 { left: 75%; font-size: 1.1rem; animation-duration: 14s; animation-delay: 2s; }
+        .fl-4 { left: 90%; font-size: 1.4rem; animation-duration: 18s; animation-delay: 8s; }
+
+        /* TEMA DEĞİŞTİRME BUTONU */
+        .theme-toggle-btn {
+            position: absolute; top: 15px; right: 15px;
+            background: var(--card-bg); border: 1.5px solid var(--text-gold); color: var(--text-gold);
+            border-radius: 50%; cursor: pointer; z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 44px; height: 44px;
+            display: grid; place-items: center; font-size: 1.15rem; transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover { transform: scale(1.08); background: var(--text-gold); color: var(--bg-edge); }
+
+        .container { max-width: 960px; margin: 0 auto; position: relative; z-index: 2; padding-top: 15px; }
+
+        /* BAŞLIKLAR */
+        header { text-align: center; margin-bottom: 28px; display: flex; flex-direction: column; align-items: center; }
+        .header-top-tag { font-size: 0.8rem; color: var(--accent-main); letter-spacing: 3px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.1rem, 5.5vw, 3.6rem); font-weight: 900; color: var(--heading-color); letter-spacing: 3px; margin-bottom: 14px; text-shadow: 0 4px 18px rgba(0,0,0,0.25); text-transform: uppercase; line-height: 1.2; }
+        [data-theme="light"] h1 { text-shadow: none; }
+        .badge-gonullu { display: inline-block; background: var(--card-bg); backdrop-filter: blur(5px); border: 1.5px solid var(--text-gold); color: var(--text-gold); padding: 7px 26px; border-radius: 30px; font-size: 0.88rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+
+        /* YATAY KOMPAKT ANA SEKMELER */
+        .ana-sekme-container { 
+            display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 12px; margin-bottom: 32px; padding: 0 10px; flex-wrap: wrap;
+        }
+        .ana-sekme-btn { 
+            background: var(--card-bg); backdrop-filter: blur(5px); 
+            border: 1.5px solid var(--text-gold); color: var(--text-gold); padding: 11px 24px; border-radius: 30px; 
+            font-family: 'Cinzel', serif; font-size: 0.92rem; cursor: pointer; transition: all 0.3s ease; 
+            font-weight: 700; box-shadow: 0 5px 15px rgba(0,0,0,0.15); display: inline-flex; align-items: center; gap: 8px;
+        }
+        .ana-sekme-btn:hover { transform: translateY(-2px); border-color: var(--heading-color); }
+        .ana-sekme-btn.aktif { background: var(--text-gold); color: #08160c; box-shadow: 0 0 18px rgba(229, 193, 120, 0.4); font-weight: 900; }
+        [data-theme="light"] .ana-sekme-btn.aktif { color: #ffffff; }
+
+        /* GÜNÜN HADÎSİ KARTI VE ALTIN ZERRELER */
+        .gunun-hadisi-karti {
+            width: 94%; max-width: 600px; margin: 5px auto 45px auto;
+            background: var(--hadis-bg);
+            border: 1.5px solid var(--text-gold); border-radius: 20px; padding: 20px 18px 18px 18px;
+            position: relative; box-shadow: 0 14px 35px rgba(0, 0, 0, 0.35);
+            text-align: center; overflow: hidden;
+        }
+        .gunun-hadisi-karti::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid var(--line-color); border-radius: 15px; pointer-events: none; z-index: 2; }
+        
+        /* Altın Işık Zerreleri (Nur Efekti) */
+        .altin-zerreler { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+        .zerre {
+            position: absolute; background: radial-gradient(circle, #fff8e7 0%, var(--text-gold) 60%, transparent 100%);
+            border-radius: 50%; opacity: 0.4; animation: zerreSuzulus 9s infinite ease-in-out;
+        }
+        .zerre:nth-child(1) { left: 15%; width: 6px; height: 6px; animation-duration: 8s; animation-delay: 0s; }
+        .zerre:nth-child(2) { left: 35%; width: 8px; height: 8px; animation-duration: 11s; animation-delay: 2s; }
+        .zerre:nth-child(3) { left: 65%; width: 5px; height: 5px; animation-duration: 9s; animation-delay: 1s; }
+        .zerre:nth-child(4) { left: 85%; width: 7px; height: 7px; animation-duration: 12s; animation-delay: 3s; }
+        @keyframes zerreSuzulus {
+            0% { top: 105%; transform: translateX(0) scale(0.8); opacity: 0; }
+            50% { opacity: 0.55; transform: translateX(12px) scale(1.1); }
+            100% { top: -10%; transform: translateX(-10px) scale(0.8); opacity: 0; }
+        }
+
+        .hadis-ust-sirali-alan { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative; z-index: 3; margin-bottom: 14px; padding: 0 8px; }
+        .hat-rozet { width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle at 45% 40%, #0d2815 0%, #051309 90%); border: 1.5px solid #e5c178; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); display: grid; place-items: center; position: relative; flex-shrink: 0; }
+        .hat-rozet span { display: block; line-height: 1; text-align: center; font-family: 'Amiri', serif; font-weight: 700; color: #e5c178; }
+        .hat-allah span { font-size: 1.5rem; transform: translateY(2px); }
+        .hat-muhammed span { font-size: 1.1rem; transform: translateY(3px); }
+        
+        .hadis-baslik-sarici { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 4px 12px; background: rgba(8, 22, 12, 0.85); border: 1px solid rgba(229, 193, 120, 0.5); border-radius: 20px; margin: 0 4px; }
+        [data-theme="light"] .hadis-baslik-sarici { background: #122e18; }
+        .hadis-baslik-sarici span { font-family: 'Cinzel', serif; font-size: clamp(0.62rem, 2.3vw, 0.78rem); font-weight: 800; letter-spacing: 1px; color: #e5c178; text-transform: uppercase; white-space: nowrap; }
+        .hadis-baslik-sarici i { color: #e5c178; font-size: 0.6rem; }
+        
+        .hadis-arapca { font-family: 'Amiri', serif; font-size: clamp(1.3rem, 4.5vw, 1.65rem); line-height: 1.85; color: var(--heading-color); direction: rtl; margin-bottom: 8px; padding: 0 6px; font-weight: 700; position: relative; z-index: 3; }
+        .hadis-ayrac { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px auto 10px auto; max-width: 180px; position: relative; z-index: 3; }
+        .hadis-ayrac .cizgi { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--text-gold), transparent); }
+        .hadis-ayrac .nokta { width: 4px; height: 4px; background: var(--text-gold); transform: rotate(45deg); }
+        .hadis-turkce { font-family: 'Lora', serif; font-size: clamp(0.95rem, 3.2vw, 1.05rem); line-height: 1.65; color: var(--text-light); font-style: italic; margin-bottom: 10px; padding: 0 8px; position: relative; z-index: 3; }
+        .hadis-kaynak { font-size: 0.8rem; color: var(--text-gold); font-weight: 700; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 5px; position: relative; z-index: 3; }
+
+        /* EĞİTİM KAMPLARI BÖLÜM BAŞLIĞI */
+        .bolum-basligi-sarici { text-align: center; margin: 10px auto 25px auto; position: relative; z-index: 2; }
+        .bolum-basligi {
+            display: inline-flex; align-items: center; gap: 12px;
+            font-family: 'Cinzel', serif; font-size: clamp(1.35rem, 4vw, 1.75rem);
+            color: var(--text-gold); font-weight: 800; letter-spacing: 2px;
+            text-transform: uppercase; padding-bottom: 10px;
+            border-bottom: 1.5px solid var(--line-color);
+        }
+        .bolum-basligi i { font-size: 1.1rem; opacity: 0.85; }
+
+        /* ZARİF TIMELINE & KAMP LEVHALARI (SADECE İSİM) */
+        .timeline { position: relative; max-width: 850px; margin: 0 auto; padding: 15px 0; }
+        .timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--line-color); top: 10px; bottom: 10px; left: 50%; transform: translateX(-50%); border-radius: 2px; z-index: 0; }
+        
+        .container-box { padding: 12px 35px; position: relative; width: 50%; box-sizing: border-box; z-index: 2; margin-bottom: 16px; }
+        .container-box::before { content: ''; position: absolute; width: 30px; height: 2px; background-color: var(--line-color); top: 50%; transform: translateY(-50%); z-index: 0; }
+        .left { left: 0; } .right { left: 50%; }
+        .left::before { right: 5px; } .right::before { left: 5px; }
+        
+        .container-box::after { content: ''; position: absolute; width: 14px; height: 14px; background-color: var(--bg-edge); border: 2.5px solid var(--text-gold); top: 50%; transform: translateY(-50%); border-radius: 50%; z-index: 1; transition: all 0.3s ease; }
+        .left::after { right: -7px; } .right::after { left: -7px; }
+        .container-box:hover::after { transform: translateY(-50%) scale(1.35); background-color: var(--text-gold); box-shadow: 0 0 12px var(--text-gold); }
+        
+        /* Zarif Ahşap/Altın Levha Görünümü */
+        .content.kamp-levha {
+            padding: 22px 26px; background-color: var(--card-bg); backdrop-filter: blur(8px);
+            position: relative; border: 1.5px solid var(--line-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            display: flex; align-items: center; justify-content: space-between; gap: 15px;
+            border-radius: 16px; transition: all 0.3s ease;
+        }
+        .content.kamp-levha::before {
+            content: ''; position: absolute; inset: 4px; border: 1px dashed rgba(229, 193, 120, 0.2);
+            border-radius: 12px; pointer-events: none;
+        }
+        .content.kamp-levha:hover {
+            transform: translateY(-4px); border-color: var(--text-gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .kamp-levha-sol { display: flex; align-items: center; gap: 14px; }
+        .kamp-levha-ikon {
+            width: 42px; height: 42px; border-radius: 12px;
+            background: rgba(229, 193, 120, 0.12); border: 1px solid var(--line-color);
+            display: grid; place-items: center; color: var(--text-gold); font-size: 1.15rem; flex-shrink: 0;
+        }
+        .content.kamp-levha h3 {
+            margin: 0; font-size: 1.3rem; color: var(--heading-color);
+            line-height: 1.3; font-weight: 800; font-family: 'Cinzel', serif;
+        }
+        .kamp-levha-ok {
+            width: 34px; height: 34px; border-radius: 50%;
+            border: 1px solid var(--line-color); display: grid; place-items: center;
+            color: var(--text-gold); font-size: 0.9rem; flex-shrink: 0; transition: all 0.3s ease;
+        }
+        .content.kamp-levha:hover .kamp-levha-ok {
+            background: var(--text-gold); color: #08160c; transform: translateX(3px);
+        }
+
+        /* STATİK SAYFALAR (HAKKIMIZDA & İLETİŞİM) */
+        .static-box {
+            background: var(--card-bg); border: 1.5px solid var(--line-color);
+            border-radius: 20px; padding: 38px 30px; margin: 0 auto; max-width: 680px;
+            text-align: center; font-size: 1.05rem; color: var(--text-light); line-height: 1.8;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25); backdrop-filter: blur(10px);
+        }
+        .static-box strong { color: var(--text-gold); font-family: 'Cinzel', serif; font-size: 1.25rem; letter-spacing: 1px; }
+        
+        /* ZARİF TELEGRAM BUTONU */
+        .btn-telegram-zarif {
+            background: rgba(229, 193, 120, 0.1);
+            color: var(--text-gold) !important;
+            font-family: 'Cinzel', serif; font-weight: 800; font-size: 0.92rem; 
+            padding: 11px 26px; border-radius: 30px; border: 1.5px solid var(--text-gold);
+            display: inline-flex; align-items: center; gap: 10px; margin-top: 18px;
+            transition: all 0.3s ease; letter-spacing: 1px;
+        }
+        .btn-telegram-zarif i { font-size: 1.15rem; }
+        .btn-telegram-zarif:hover {
+            background: var(--text-gold); color: #08160c !important;
+            transform: translateY(-2px); box-shadow: 0 6px 20px rgba(229, 193, 120, 0.3);
+        }
+        [data-theme="light"] .btn-telegram-zarif:hover { color: #ffffff !important; }
+
+        /* NİYET POPUP */
+        #welcomeModal { position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: var(--modal-overlay); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; padding: 15px; }
+        .welcome-content { background: var(--hadis-bg); padding: 45px 35px; border: 2px solid var(--text-gold); border-radius: 20px; text-align: center; max-width: 620px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+        .welcome-title { font-family: 'Cinzel', serif; color: var(--text-gold); font-size: 1.65rem; font-weight: 900; margin-bottom: 18px; border-bottom: 1px dashed var(--line-color); padding-bottom: 14px; }
+        .arabic-text { font-family: 'Amiri', serif; font-size: 2.5rem; color: var(--heading-color); line-height: 1.6; margin: 20px 0 12px 0; }
+        .turkish-text { font-style: italic; color: var(--text-light); font-size: 1.05rem; margin-bottom: 24px; opacity: 0.9; }
+        .niyet-kutusu { background: rgba(229, 193, 120, 0.08); border-left: 3px solid var(--text-gold); border-right: 3px solid var(--text-gold); padding: 14px 18px; margin: 0 auto 26px auto; border-radius: 10px; font-style: italic; color: var(--text-light); font-size: 1rem; line-height: 1.6; }
+        .accept-btn { background-color: var(--text-gold); color: #08160c; font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.05rem; padding: 14px 36px; border: none; border-radius: 40px; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1px; }
+        [data-theme="light"] .accept-btn { color: #ffffff; }
+        .accept-btn:hover { transform: translateY(-3px); opacity: 0.95; }
+
+        /* MOBİL ALT NAVİGASYON & UYUM */
+        .mobil-alt-nav { display:none; }
+        @media (max-width: 768px) {
+            body { padding-bottom: calc(95px + env(safe-area-inset-bottom)) !important; }
+            .ana-sekme-container { display:none !important; }
+            .mobil-alt-nav {
+                position:fixed; left:12px; right:12px; bottom:calc(10px + env(safe-area-inset-bottom));
+                height:64px; display:grid; grid-template-columns:repeat(3,1fr); align-items:stretch;
+                background: var(--card-bg); border:1.5px solid var(--text-gold); border-radius:20px;
+                box-shadow:0 10px 35px rgba(0,0,0,.5); backdrop-filter:blur(16px); z-index:1500; padding:4px;
+            }
+            .mobil-nav-btn { border:0; background:transparent; color: var(--text-light); opacity: 0.7; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-radius:14px; font-family:'Cinzel',serif; font-size:.68rem; font-weight:700; cursor:pointer; transition: all 0.3s; }
+            .mobil-nav-btn i { font-size:1.1rem; }
+            .mobil-nav-btn.aktif { color: var(--text-gold); opacity: 1; background:rgba(229, 193, 120, 0.12); }
+            
+            /* Mobilde Tek Sütun Nizami Kamp Levhaları */
+            .timeline::after { left: 20px; } 
+            .container-box { width: 100%; padding-left: 50px; padding-right: 10px; margin-bottom: 14px; }
+            .left, .right { left: 0; }
+            .left::before, .right::before { left: 20px; width: 20px; }
+            .left::after, .right::after { left: 13px; }
+            .content.kamp-levha { padding: 18px 20px; }
+            .content.kamp-levha h3 { font-size: 1.15rem; }
+            
+            .static-box { padding: 28px 18px; font-size: 0.98rem; }
+            .welcome-content { padding: 30px 18px; }
+            .arabic-text { font-size: 1.9rem; }
+        }
+
+        /* FOOTER */
+        footer { margin-top: 65px; border-top: 1px solid var(--line-color); padding-top: 35px; text-align: center; position: relative; z-index: 2; }
+        .footer-copyright { display: block; font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 2px; color: var(--text-gold); font-weight: 700; text-transform: uppercase; opacity: 0.85; margin-bottom: 15px;}
+    </style>
+</head>
+<body>
+
+<div class="bokeh b1"></div>
+<div class="bokeh b2"></div>
+<div class="bokeh b3"></div>
+
+<div class="garden-breeze">
+    <i class="fa-solid fa-leaf falling-leaf fl-1"></i>
+    <i class="fa-solid fa-leaf falling-leaf fl-2"></i>
+    <i class="fa-solid fa-leaf falling-leaf fl-3"></i>
+    <i class="fa-solid fa-leaf falling-leaf fl-4"></i>
+</div>
+
+<div class="container">
+    <!-- TEMA DEĞİŞTİRME BUTONU -->
+    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Gece / Gündüz Teması">
+        <i class="fa-solid fa-moon" id="themeIcon"></i>
+    </button>
+
+    <header id="ana-ekran-ust">
+        <span class="header-top-tag">BİLGİ, AHLAK VE İRFAN</span>
+        <h1>SİYER KAMPLARI</h1>
+        <div class="badge-gonullu">GÖNÜLLÜ EĞİTİM PLATFORMU</div>
+    </header>
+
+    <!-- MASAÜSTÜ SEKMELER -->
+    <div class="ana-sekme-container">
+        <button class="ana-sekme-btn aktif" onclick="anaSekmeDegistir('kamplar')"><i class="fa-solid fa-archway"></i> Eğitim Kamplarımız</button>
+        <button class="ana-sekme-btn" onclick="anaSekmeDegistir('hakkimizda')"><i class="fa-solid fa-seedling"></i> Hakkımızda</button>
+        <button class="ana-sekme-btn" onclick="anaSekmeDegistir('iletisim')"><i class="fa-regular fa-paper-plane"></i> İletişim</button>
+    </div>
+
+    <!-- 1. SEKME: KAMPLAR -->
+    <div id="kamplar-alan">
+        <!-- GÜNÜN HADÎS-İ ŞERÎFİ -->
+        <div class="gunun-hadisi-karti">
+            <div class="altin-zerreler">
+                <span class="zerre"></span><span class="zerre"></span><span class="zerre"></span><span class="zerre"></span>
+            </div>
+            <div class="hadis-ust-sirali-alan">
+                <div class="hat-rozet hat-muhammed" title="Muhammed Aleyhisselâm"><span>مُحَمَّد</span></div>
+                <div class="hadis-baslik-sarici">
+                    <i class="fa-solid fa-star-and-crescent"></i>
+                    <span>Günün Hadîs-i Şerîfi</span>
+                    <i class="fa-solid fa-star-and-crescent"></i>
+                </div>
+                <div class="hat-rozet hat-allah" title="Allah Celle Celâluhû"><span>اللّٰه</span></div>
+            </div>
+
+            <div class="hadis-arapca" id="hadisArapca">Yükleniyor...</div>
+            <div class="hadis-ayrac">
+                <span class="cizgi"></span><span class="nokta"></span><span class="cizgi"></span>
+            </div>
+            <div class="hadis-turkce" id="hadisTurkce">...</div>
+            <div class="hadis-kaynak">
+                <i class="fa-solid fa-book-open"></i> <span>Riyâzü’s-Sâlihîn</span>
+            </div>
+        </div>
+
+        <!-- EĞİTİM KAMPLARI BAŞLIĞI -->
+        <div class="bolum-basligi-sarici">
+            <h2 class="bolum-basligi">
+                <i class="fa-solid fa-archway"></i> Eğitim Kampları
+            </h2>
+        </div>
+
+        <!-- SADELEŞTİRİLMİŞ KAMP LEVHALARI -->
+        <div class="timeline" id="timelineContainer">
+            <!-- 1. KAMP: İMAM NEVEVİ -->
+            <div class="container-box left">
+                <a href="/imamnevevi" class="content kamp-levha">
+                    <div class="kamp-levha-sol">
+                        <div class="kamp-levha-ikon"><i class="fa-solid fa-book-open-reader"></i></div>
+                        <h3>İmâm Nevevî Kampı</h3>
+                    </div>
+                    <div class="kamp-levha-ok"><i class="fa-solid fa-chevron-right"></i></div>
+                </a>
+            </div>
+
+            <!-- 2. KAMP: SİYERDEN AHLAKA -->
+            <div class="container-box right">
+                <a href="/siyerdenahlaka" class="content kamp-levha">
+                    <div class="kamp-levha-sol">
+                        <div class="kamp-levha-ikon"><i class="fa-solid fa-compass"></i></div>
+                        <h3>Siyerden Ahlaka</h3>
+                    </div>
+                    <div class="kamp-levha-ok"><i class="fa-solid fa-chevron-right"></i></div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. SEKME: HAKKIMIZDA -->
+    <div id="hakkimizda-alan" style="display: none; padding-top: 10px;">
+        <div class="static-box">
+            <i class="fa-solid fa-seedling" style="font-size: 2.2rem; color: var(--text-gold); margin-bottom: 16px; display: block;"></i>
+            <strong>Siyer Kampları Gönüllü Platformu</strong><br><br>
+            Bu platform, hiçbir ticari amaç gütmeyen, tamamen gönüllü katkılarıyla hazırlanan ve ücretsiz bilgi paylaşımını hedefleyen bir eğitim çalışmasıdır.<br><br>
+            Gayemiz, teknoloji ve eğitimi harmanlayarak, ilim ve ahlak yolunda yürümek isteyen herkese her an ulaşılabilir dijital bir kapı aralamaktır.
+        </div>
+    </div>
+
+    <!-- 3. SEKME: İLETİŞİM -->
+    <div id="iletisim-alan" style="display: none; padding-top: 10px;">
+        <div class="static-box">
+            <i class="fa-regular fa-paper-plane" style="font-size: 2.2rem; color: var(--text-gold); margin-bottom: 16px; display: block;"></i>
+            <strong>Bizimle İletişime Geçin</strong><br><br>
+            Sistem hakkında soru sormak, kampların işleyişi hakkında detaylı bilgi almak veya önerilerinizi iletmek için bize doğrudan Telegram üzerinden ulaşabilirsiniz.<br>
+            <a href="https://t.me/ByKim1" target="_blank" class="btn-telegram-zarif">
+                <i class="fa-brands fa-telegram"></i> İletişim: @ByKim1
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-copyright">&copy; 2026 SİYER KAMPLARI GÖNÜLLÜ PLATFORMU</span>
+    </footer>
+</div>
+
+<!-- MOBİL ALT MENÜ -->
+<nav class="mobil-alt-nav" id="mobilAltNav" aria-label="Mobil ana menü">
+    <button class="mobil-nav-btn aktif" onclick="anaSekmeDegistir('kamplar')"><i class="fa-solid fa-archway"></i><span>Kamplar</span></button>
+    <button class="mobil-nav-btn" onclick="anaSekmeDegistir('hakkimizda')"><i class="fa-solid fa-seedling"></i><span>Hakkımızda</span></button>
+    <button class="mobil-nav-btn" onclick="anaSekmeDegistir('iletisim')"><i class="fa-regular fa-paper-plane"></i><span>İletişim</span></button>
+</nav>
+
+<!-- NİYET POPUP -->
+<div id="welcomeModal">
+    <div class="welcome-content">
+        <h2 class="welcome-title">Siyer Kampları Platformu</h2>
+        <div class="arabic-text">إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى</div>
+        <p class="turkish-text">"Ameller (başka değil) ancak niyetlere göredir; herkesin niyeti ne ise eline geçecek odur."</p>
+        <div class="niyet-kutusu">
+            "Niyet ettim; ilim ve irfan meclislerine dijital de olsa dâhil olmaya, öğrendiğim bu güzellikleri hayatıma taşımaya ve her daim istikamet üzere kalmaya.."
+        </div>
+        <button class="accept-btn" onclick="closeWelcomeModal()">Bismillah diyerek başla</button>
+    </div>
+</div>
+
+<script>
+    // GECE / GÜNDÜZ TEMA DEĞİŞİMİ
+    function toggleTheme() {
+        const html = document.documentElement;
+        const icon = document.getElementById('themeIcon');
+        if (html.getAttribute('data-theme') === 'dark') {
+            html.setAttribute('data-theme', 'light');
+            icon.className = 'fa-solid fa-sun';
+            localStorage.setItem('siyer_merkez_theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            icon.className = 'fa-solid fa-moon';
+            localStorage.setItem('siyer_merkez_theme', 'dark');
+        }
+    }
+    
+    if (localStorage.getItem('siyer_merkez_theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+    }
+
+    // SEKMELER ARASI GEÇİŞ
+    function anaSekmeDegistir(sekme) {
+        const butonlar = document.querySelectorAll('.ana-sekme-btn');
+        const mobilButonlar = document.querySelectorAll('.mobil-nav-btn');
+        const alanlar = {
+            kamplar: document.getElementById('kamplar-alan'),
+            hakkimizda: document.getElementById('hakkimizda-alan'),
+            iletisim: document.getElementById('iletisim-alan')
+        };
+        
+        butonlar.forEach(b => b.classList.remove('aktif'));
+        mobilButonlar.forEach(b => b.classList.remove('aktif'));
+        Object.values(alanlar).forEach(a => { if(a) a.style.display = 'none'; });
+        
+        if (sekme === 'kamplar') { 
+            if(butonlar[0]) butonlar[0].classList.add('aktif'); 
+            if(mobilButonlar[0]) mobilButonlar[0].classList.add('aktif');
+            alanlar.kamplar.style.display = 'block'; 
+        }
+        if (sekme === 'hakkimizda') { 
+            if(butonlar[1]) butonlar[1].classList.add('aktif'); 
+            if(mobilButonlar[1]) mobilButonlar[1].classList.add('aktif');
+            alanlar.hakkimizda.style.display = 'block'; 
+        }
+        if (sekme === 'iletisim') { 
+            if(butonlar[2]) butonlar[2].classList.add('aktif'); 
+            if(mobilButonlar[2]) mobilButonlar[2].classList.add('aktif');
+            alanlar.iletisim.style.display = 'block'; 
+        }
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // GÜNÜN HADİSİ LİSTESİ
+    const riyazusSalihinHavuzu = [
+        { arapca: "إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى", turkce: "«Amellerin değeri ancak niyetlere göredir. Herkesin niyeti ne ise eline geçecek olan odur.»" },
+        { arapca: "دَعْ مَا يَرِيبُكَ إِلَى مَا لَا يَرِيبُكَ", turkce: "«Sana şüphe veren şeyleri bırak ve sana şüphe vermeyen şeyleri al.»" },
+        { arapca: "لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأخيهِ مَا يُحِبُّ لِنَفْسِهِ", turkce: "«Sizden her biriniz, kendi nefsi için sevip arzuladığı şeyleri, mümin kardeşi için de sevip arzu etmedikçe iman etmiş olmaz.»" },
+        { arapca: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْراً أَوْ لِيَصْمُتْ", turkce: "«Allah'a ve ahiret gününe iman eden bir kimse, ya hayır söylesin ya da sussun.»" },
+        { arapca: "الطَّهُورِ شَطْرُ الإِيمَانِ، وَأَلْحَمْدُ لِلَّهِ تَمْلَأُ المِيزَانَ", turkce: "«Temizlik imanın yarısıdır. Elhamdülillah sözü mizanı (teraziyi) doldurur.»" },
+        { arapca: "الْمُسْلِمُ مَنْ سَلِمَ الْمُسْلِمُونَ مِنْ لِسَانِهِ وَيَدِهِ", turkce: "«Müslüman, elinden ve dilinden diğer Müslümanların güvende olduğu kimsedir.»" }
+    ];
+
+    function gununHadisiniGoster() {
+        const bugun = new Date();
+        const baslangic = new Date(bugun.getFullYear(), 0, 0);
+        const index = Math.floor((bugun - baslangic) / (1000 * 60 * 60 * 24)) % riyazusSalihinHavuzu.length;
+        document.getElementById('hadisArapca').innerText = riyazusSalihinHavuzu[index].arapca;
+        document.getElementById('hadisTurkce').innerText = riyazusSalihinHavuzu[index].turkce;
+    }
+
+    function closeWelcomeModal() {
+        document.getElementById('welcomeModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        sessionStorage.setItem('siyer_niyet_okundu', 'true');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        gununHadisiniGoster();
+        if (sessionStorage.getItem('siyer_niyet_okundu') === 'true') {
+            document.getElementById('welcomeModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        } else {
+            document.body.style.overflow = 'hidden';
+        }
+    });
+</script>
+</body>
+</html>
