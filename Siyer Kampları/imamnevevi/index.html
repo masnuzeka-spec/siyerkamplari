@@ -1197,8 +1197,28 @@
         }
     }
 
-    async function canliZiyaretciGetir() {
-        document.getElementById('canliSayacRakam').innerText = "1,248";
+    function canliZiyaretciBaslat() {
+        const sayacEl = document.getElementById('canliSayacRakam');
+        
+        // Tarayıcı hafızasına bakar, eğer yoksa senin Vercel'deki gerçek sayın olan 11742'den başlar
+        let aktifSayi = parseInt(localStorage.getItem('nevevi_toplam_sayac')) || 11742;
+        
+        // İlk girişte sayıyı ekrana bas
+        if (sayacEl) sayacEl.innerText = aktifSayi.toLocaleString('tr-TR');
+
+        // Canlı hissi vermek için her 5 saniyede bir kontrol et
+        setInterval(() => {
+            // %60 ihtimalle artış yap (her saniye artmasın ki organik ve inandırıcı dursun)
+            if (Math.random() > 0.4) {
+                let artis = Math.floor(Math.random() * 3) + 1; // 1 ila 3 arası rastgele kişi ekle
+                aktifSayi += artis;
+                
+                if (sayacEl) sayacEl.innerText = aktifSayi.toLocaleString('tr-TR');
+                
+                // Sayfayı yenilediğinde geriye düşmemesi için son sayıyı tarayıcıya kaydet
+                localStorage.setItem('nevevi_toplam_sayac', aktifSayi);
+            }
+        }, 5000);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -1207,8 +1227,8 @@
         renderOkumaTakvimi();
         gununHadisiniGoster();
 
-        canliZiyaretciGetir();
-        fetchData(); // Doğrudan Google Apps Script'ten verileri çeker
+        canliZiyaretciBaslat(); 
+        fetchData();
 
         if (sessionStorage.getItem('nevevi_niyet_okundu') === 'true') {
             document.getElementById('welcomeModal').style.display = 'none';
