@@ -5,29 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>İmâm Nevevî Kampı | Gönüllü Platformu</title>
     
-    <!-- Sosyal Medya & Önizleme Başlıkları (Open Graph) -->
-    <meta name="title" content="İmâm Nevevî Kampı">
-    <meta name="description" content="Büyüklerin Ayak İzleri: İmâm Nevevî Kampı Gönüllü Platformu">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="İmâm Nevevî Kampı">
-    <meta property="og:description" content="Büyüklerin Ayak İzleri: İmâm Nevevî Kampı Gönüllü Platformu">
-    <meta property="og:image" content="https://imamnevevikampi.vercel.app/icon-512.png">
-
-    <!-- Twitter Önizleme -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="İmâm Nevevî Kampı">
-    <meta name="twitter:description" content="Büyüklerin Ayak İzleri: İmâm Nevevî Kampı Gönüllü Platformu">
-    <meta name="twitter:image" content="https://imamnevevikampi.vercel.app/icon-512.png">
-
-    <!-- PWA & İkon Bağlantıları -->
-    <link rel="manifest" href="manifest.json">
+    <!-- PWA VE UYGULAMA İKONLARI -->
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#15381a">
-    
-    <!-- iOS Safari Özel Ayarları -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Nevevî Kampı">
-    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="Siyer Kampı">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+
+    <!-- SOSYAL MEDYA PAYLAŞIM GÖRÜNÜMÜ (Open Graph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.siyerkamplari.com.tr/imamnevevikampi">
+    <meta property="og:title" content="İmâm Nevevî Kampı | Gönüllü Platformu">
+    <meta property="og:description" content="Büyüklerin ayak izlerini takip ettiğimiz dijital eğitim ve kamp platformu.">
+    <meta property="og:image" content="https://www.siyerkamplari.com.tr/social-preview.jpg">
+
+    <!-- TWITTER / X ÖNİZLEMESİ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="İmâm Nevevî Kampı | Gönüllü Platformu">
+    <meta name="twitter:description" content="Büyüklerin ayak izlerini takip ettiğimiz dijital eğitim ve kamp platformu.">
+    <meta name="twitter:image" content="https://www.siyerkamplari.com.tr/social-preview.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +35,7 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<!-- 🔔 ONESIGNAL BİLDİRİM SİSTEMİ (ZÜMRÜT/ALTIN TEMALI) -->
+    <!-- 🔔 ONESIGNAL BİLDİRİM SİSTEMİ -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -90,19 +88,16 @@
             min-height: 100vh;
         }
 
-        /* 🟢 RADYAL DERİNLİK */
         body::before {
             content: ""; position: fixed; inset: 0; z-index: -4;
             background: radial-gradient(circle at 50% 20%, var(--bg-center) 0%, #15381a 50%, var(--bg-edge) 100%);
         }
 
-        /* 🌿 DOĞAL DOKU */
         body::after {
             content: ""; position: fixed; inset: 0; z-index: -3; pointer-events: none;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
         }
 
-        /* ✨ GÜNEŞ IŞIKLARI (BOKEH) */
         .bokeh {
             position: fixed; border-radius: 50%; filter: blur(50px); z-index: -2;
             animation: float 20s ease-in-out infinite alternate; opacity: 0.6; pointer-events: none;
@@ -117,7 +112,6 @@
             100% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
-        /* 🍂 HAVADAN SÜZÜLEN YAPRAKLAR */
         .garden-breeze { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
         .falling-leaf {
             position: absolute; color: #a5d6a7; top: -10%; font-size: 1.8rem;
@@ -136,83 +130,37 @@
 
         .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
 
-        /* BAŞLIKLAR */
         header { text-align: center; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center; }
         .header-top-tag { font-size: 0.85rem; color: var(--accent-main); letter-spacing: 3px; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         h1 { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; color: #fff; letter-spacing: 3px; margin-bottom: 15px; text-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 15px rgba(243, 207, 139, 0.3); text-transform: uppercase; line-height: 1.2; }
         .badge-gonullu { display: inline-block; background: rgba(15, 40, 20, 0.6); backdrop-filter: blur(5px); border: 1.5px solid var(--text-gold); color: var(--text-gold); padding: 8px 30px; border-radius: 30px; font-size: 0.95rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .header-date { font-size: 1.1rem; color: #fff; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
-        /* 🔥 AKSİYON BUTONLARI (PDF + TELEGRAM) TASARIMI */
         .aksiyon-alanlari { text-align: center; margin: 10px auto 35px auto; display: flex; flex-direction: column; align-items: center; gap: 20px; z-index: 10; position: relative; }
         .aksiyon-satir { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
 
-        .btn-pdf-indir {
-            background: linear-gradient(135deg, #E2B973 0%, #f3cf8b 50%, #b38938 100%);
-            color: #0b2614 !important;
-            font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.05rem; text-decoration: none;
-            padding: 15px 35px; border-radius: 50px; border: 2px solid #fff;
-            display: inline-flex; align-items: center; gap: 12px;
-            box-shadow: 0 8px 25px rgba(226, 185, 115, 0.4), inset 0 0 10px rgba(255,255,255,0.5);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase; letter-spacing: 1px;
-        }
-        .btn-pdf-indir:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(226, 185, 115, 0.7), inset 0 0 15px rgba(255,255,255,0.8);
-            background: linear-gradient(135deg, #f3cf8b 0%, #fff 50%, #E2B973 100%);
-        }
+        .btn-pdf-indir { background: linear-gradient(135deg, #E2B973 0%, #f3cf8b 50%, #b38938 100%); color: #0b2614 !important; font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.05rem; text-decoration: none; padding: 15px 35px; border-radius: 50px; border: 2px solid #fff; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 8px 25px rgba(226, 185, 115, 0.4), inset 0 0 10px rgba(255,255,255,0.5); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; }
+        .btn-pdf-indir:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 30px rgba(226, 185, 115, 0.7), inset 0 0 15px rgba(255,255,255,0.8); background: linear-gradient(135deg, #f3cf8b 0%, #fff 50%, #E2B973 100%); }
         .btn-pdf-indir i { font-size: 1.4rem; color: #900; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
-        .btn-telegram-test {
-            background: linear-gradient(135deg, #24A1DE 0%, #3bb4ed 50%, #1c88bd 100%);
-            color: #fff !important;
-            font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.05rem; text-decoration: none;
-            padding: 15px 35px; border-radius: 50px; border: 2px solid #fff;
-            display: inline-flex; align-items: center; gap: 12px;
-            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4), inset 0 0 10px rgba(255,255,255,0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-transform: uppercase; letter-spacing: 1px;
-            animation: pulse-blue 2s infinite;
-        }
-        .btn-telegram-test:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(36, 161, 222, 0.7), inset 0 0 15px rgba(255,255,255,0.5);
-            background: linear-gradient(135deg, #3bb4ed 0%, #fff 50%, #24A1DE 100%);
-            color: #0b2614 !important;
-            animation: none;
-        }
+        .btn-telegram-test { background: linear-gradient(135deg, #24A1DE 0%, #3bb4ed 50%, #1c88bd 100%); color: #fff !important; font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.05rem; text-decoration: none; padding: 15px 35px; border-radius: 50px; border: 2px solid #fff; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4), inset 0 0 10px rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; animation: pulse-blue 2s infinite; }
+        .btn-telegram-test:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 12px 30px rgba(36, 161, 222, 0.7), inset 0 0 15px rgba(255,255,255,0.5); background: linear-gradient(135deg, #3bb4ed 0%, #fff 50%, #24A1DE 100%); color: #0b2614 !important; animation: none; }
         .btn-telegram-test:hover i { color: #24A1DE; text-shadow: none; }
         .btn-telegram-test i { font-size: 1.4rem; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.3); transition: 0.3s; }
-
         .alt-bilgi { font-size: 0.85rem; color: #a5d6a7; font-style: italic; letter-spacing: 0.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
         
-        @keyframes pulse-blue {
-            0% { box-shadow: 0 0 0 0 rgba(36, 161, 222, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(36, 161, 222, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(36, 161, 222, 0); }
-        }
-        @media (max-width: 450px) {
-            .btn-pdf-indir, .btn-telegram-test { font-size: 0.9rem; padding: 12px 25px; width: 90%; justify-content: center; }
-        }
+        @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(36, 161, 222, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(36, 161, 222, 0); } 100% { box-shadow: 0 0 0 0 rgba(36, 161, 222, 0); } }
+        @media (max-width: 450px) { .btn-pdf-indir, .btn-telegram-test { font-size: 0.9rem; padding: 12px 25px; width: 90%; justify-content: center; } }
 
-        /* 👑 ANA SEKMELER (DİKEY NİZAMİ DİZİLİM) */
         .ana-sekme-container { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 30px; padding: 0 10px; }
         .ana-sekme-btn { width: 100%; max-width: 320px; background: rgba(20, 48, 25, 0.8); backdrop-filter: blur(5px); border: 2px solid var(--text-gold); color: var(--text-gold); padding: 14px 20px; border-radius: 30px; font-family: 'Cinzel', serif; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; font-weight: bold; box-shadow: 0 5px 15px rgba(0,0,0,0.3); text-align: center; }
         .ana-sekme-btn:hover { transform: translateY(-3px); background: rgba(30, 70, 38, 0.9); }
         .ana-sekme-btn.aktif { background: var(--text-gold); color: #15381a; box-shadow: 0 0 20px rgba(243, 207, 139, 0.5); font-weight: 900; }
 
-        /* ======================================================== */
-        /* 📜 GÜNÜN HADÎSİ & İLERLEME KARTI - NİZAMİ UYUM          */
-        /* ======================================================== */
-        .gunun-hadisi-karti,
-        .progress-container { width: 92% !important; max-width: 580px !important; margin-left: auto !important; margin-right: auto !important; box-sizing: border-box !important; }
-
-        /* 🏛️ GÜNÜN HADÎSİ LEVHASI */
+        .gunun-hadisi-karti, .progress-container { width: 92% !important; max-width: 580px !important; margin-left: auto !important; margin-right: auto !important; box-sizing: border-box !important; }
         .gunun-hadisi-karti { margin-top: 10px !important; margin-bottom: 22px !important; background: radial-gradient(circle at 50% 15%, #133e21 0%, rgba(10, 32, 17, 0.98) 80%, #051409 100%) !important; border: 1.5px solid #E2B973 !important; border-radius: 20px !important; padding: 18px 16px 16px 16px !important; position: relative !important; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(226, 185, 115, 0.12) !important; text-align: center !important; overflow: hidden !important; }
         .gunun-hadisi-karti::before { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid rgba(226, 185, 115, 0.25); border-radius: 15px; pointer-events: none; z-index: 2; }
 
-        /* 🌸 SÜZÜLEN GÜL YAPRAKLARI */
         .gul-yapraklari { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
         .gul-yaprak { position: absolute; background: radial-gradient(circle at 30% 30%, #ff8fa3, #c9184a); border-radius: 50% 0 50% 50%; opacity: 0.35; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)); animation: gulSalinimi 10s infinite linear; }
         .gul-yaprak:nth-child(1) { left: 10%; width: 13px; height: 15px; animation-duration: 8.5s; animation-delay: 0s; }
@@ -222,7 +170,6 @@
         .gul-yaprak:nth-child(5) { left: 46%; width: 9px; height: 11px; animation-duration: 10.5s; animation-delay: 6s; opacity: 0.22; }
         @keyframes gulSalinimi { 0% { top: -20px; transform: rotate(0deg) translateX(0); } 50% { transform: rotate(180deg) translateX(20px); } 100% { top: 105%; transform: rotate(360deg) translateX(-15px); } }
 
-        /* 👑 ÜST SATIR: KENAR PAYLI GÜVENLİ HİZALAMA */
         .hadis-ust-sirali-alan { display: flex !important; justify-content: space-between !important; align-items: center !important; width: 100% !important; direction: ltr !important; position: relative !important; z-index: 3 !important; margin-bottom: 14px !important; padding: 0 12px !important; box-sizing: border-box !important; }
         .hat-rozet { width: 46px !important; height: 46px !important; border-radius: 50% !important; background: radial-gradient(circle at 45% 40%, #0d2815 0%, #051309 85%, #020904 100%) !important; border: 1.5px solid #E2B973 !important; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.75), 0 0 10px rgba(226, 185, 115, 0.25) !important; display: grid !important; place-items: center !important; position: relative !important; flex-shrink: 0 !important; user-select: none !important; box-sizing: border-box !important; padding: 0 !important; margin: 0 !important; }
         .hat-rozet::after { content: '' !important; position: absolute !important; top: 3px !important; left: 3px !important; right: 3px !important; bottom: 3px !important; border: 1px solid rgba(243, 207, 139, 0.45) !important; border-radius: 50% !important; pointer-events: none !important; }
@@ -242,7 +189,6 @@
             .hadis-baslik-sarici span { font-size: 0.85rem !important; letter-spacing: 2px !important; }
         }
 
-        /* 📜 HADÎS İÇERİK METİNLERİ */
         .hadis-icerik-katmani { position: relative; z-index: 3; }
         .hadis-arapca { font-family: 'Amiri', serif !important; font-size: clamp(1.25rem, 4.5vw, 1.6rem) !important; line-height: 1.85 !important; color: #fff8e7 !important; direction: rtl !important; margin-bottom: 8px !important; padding: 0 6px !important; font-weight: 700 !important; word-break: break-word !important; text-shadow: 0 2px 6px rgba(0,0,0,0.85) !important; }
         .hadis-ayrac { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px auto 10px auto; max-width: 180px; }
@@ -251,7 +197,6 @@
         .hadis-turkce { font-family: 'Lora', serif !important; font-size: clamp(0.92rem, 3.2vw, 1.05rem) !important; line-height: 1.6 !important; color: #FAF5EF !important; font-style: italic !important; margin-bottom: 10px !important; padding: 0 6px !important; text-shadow: 0 1px 3px rgba(0,0,0,0.7) !important; }
         .hadis-kaynak { font-size: 0.8rem; color: #E2B973; font-weight: 600; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 5px; opacity: 0.9; }
 
-        /* 🌿 İLERLEME KARTI */
         .progress-container { background: radial-gradient(circle at 50% 30%, #0c2916 0%, #06180c 100%) !important; border: 1.5px solid rgba(226, 185, 115, 0.4) !important; border-radius: 18px !important; padding: 14px 18px !important; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7) !important; margin-bottom: 30px !important; display: flex !important; flex-direction: column !important; gap: 10px !important; }
         .progress-bar-bg { background-color: rgba(3, 12, 6, 0.9) !important; border: 1px solid rgba(226, 185, 115, 0.25) !important; border-radius: 10px !important; height: 8px !important; width: 100% !important; overflow: hidden !important; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5) !important; margin: 0 !important; }
         .progress-bar-fill { background: linear-gradient(90deg, #b38938 0%, #E2B973 50%, #fff0b8 100%) !important; height: 100% !important; width: 0%; border-radius: 10px !important; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1) !important; box-shadow: 0 0 10px rgba(226, 185, 115, 0.5) !important; }
@@ -259,7 +204,6 @@
         .progress-info span:first-child { color: #FAF5EF !important; font-size: clamp(0.72rem, 2.7vw, 0.82rem) !important; letter-spacing: 0.8px !important; white-space: nowrap !important; }
         #progressText { color: #E2B973 !important; font-size: clamp(0.74rem, 2.8vw, 0.85rem) !important; font-weight: 800 !important; letter-spacing: 0.8px !important; white-space: nowrap !important; }
 
-        /* 📖 OKUMA TAKVİMİ TASARIMI */
         .okuma-liste-alani { display: flex; flex-direction: column; gap: 14px; max-width: 800px; margin: 0 auto; padding-bottom: 30px; }
         .okuma-satir { display: flex; align-items: center; justify-content: space-between; background: rgba(11, 38, 20, 0.6); border: 1px solid rgba(226, 185, 115, 0.3); border-radius: 16px; padding: 16px 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; }
         .okuma-satir:hover { background: rgba(226, 185, 115, 0.1); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
@@ -279,7 +223,6 @@
         .okuma-satir.tamamlandi .okuma-etiket { color: #f8c2b5; }
         .okuma-etiket { color: #dcebd2; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
 
-        /* ZARİF TIMELINE ÇİZGİSİ */
         .timeline { position: relative; max-width: 1000px; margin: 0 auto; padding: 20px 0; animation: fadeIn 0.8s ease; }
         .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--line-color); top: 20px; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 2px; box-shadow: 0 0 15px var(--line-color); z-index: 0; }
         .container-box { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; z-index: 2; margin-bottom: 20px; }
@@ -293,7 +236,6 @@
         .container-box.dolu-kutu .content { border-color: rgba(243, 207, 139, 0.7); }
         .container-box.completed::after { background-color: #81c784 !important; border-color: #fff !important; box-shadow: 0 0 15px #81c784 !important; }
 
-        /* YAPRAK FORMUNDA KARTLAR */
         .content { padding: 25px 30px; background-color: var(--card-bg); backdrop-filter: blur(8px); position: relative; border: 1px solid rgba(243, 207, 139, 0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 0 20px rgba(255,255,255,0.05); transition: all 0.3s ease; cursor: pointer; text-align: left; z-index: 2; }
         .container-box.completed .content { background: linear-gradient(135deg, var(--autumn-leaf-1), var(--autumn-leaf-2)); border-color: #e67d63; box-shadow: 0 15px 35px rgba(97, 30, 10, 0.6), inset 0 0 20px rgba(255,255,255,0.1); }
         .left .content { border-radius: 50px 10px 50px 10px; } .right .content { border-radius: 10px 50px 10px 50px; }
@@ -308,7 +250,6 @@
         .card-footer { display: flex; justify-content: flex-end; align-items: center; font-size: 0.9rem; margin-top: 15px; border-top: 1px dashed rgba(243, 207, 139, 0.3); padding-top: 15px; }
         .card-status { font-size: 0.95rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
 
-        /* NİYET POPUP */
         #welcomeModal { position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: var(--modal-overlay); backdrop-filter: blur(15px); display: flex; align-items: center; justify-content: center; padding: 15px; }
         .welcome-content { background: linear-gradient(145deg, #183d21 0%, #0a1f11 100%); padding: 50px 40px; border: 2px solid var(--text-gold); border-radius: 20px; text-align: center; max-width: 650px; width: 100%; box-shadow: 0 20px 80px rgba(0,0,0,1); animation: zoomIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .welcome-title { font-family: 'Cinzel', serif; color: var(--text-gold); font-size: 1.8rem; font-weight: 900; margin-bottom: 20px; border-bottom: 1px dashed rgba(243, 207, 139, 0.4); padding-bottom: 15px; line-height: 1.3; }
@@ -318,7 +259,6 @@
         .accept-btn { background-color: var(--text-gold); color: #15381a; font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.15rem; padding: 16px 40px; border: none; border-radius: 40px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(243, 207, 139, 0.3); letter-spacing: 1px; }
         .accept-btn:hover { transform: translateY(-4px); background-color: #fff; box-shadow: 0 12px 25px rgba(255, 255, 255, 0.4); }
 
-        /* MODALLAR */
         .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 15px; }
         .modal-overlay.active { display: flex; }
         .modal-window { background: linear-gradient(145deg, #183d21 0%, #0a1f11 100%); border: 2px solid var(--text-gold); border-radius: 20px; max-width: 860px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; padding: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.9); }
@@ -348,7 +288,6 @@
         .duyuru-baslik { color: var(--text-gold); font-family: 'Cinzel', serif; font-size: 1.6rem; margin-bottom: 20px; border-bottom: 1px dashed rgba(243, 207, 139, 0.3); padding-bottom: 15px; }
         .btn-duyuru-kapat { background: var(--text-gold); color: #15381a; border: none; padding: 14px; font-weight: 900; font-family: 'Cinzel', serif; font-size: 1.15rem; border-radius: 10px; cursor: pointer; width: 100%; transition: all 0.3s; margin-top:25px; }
 
-        /* FOOTER */
         footer { margin-top: 80px; border-top: 1px solid rgba(243, 207, 139, 0.2); padding-top: 50px; text-align: center; position: relative; z-index: 2; }
         .yakisikli-sayac-yeni { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle at center, rgba(20, 56, 30, 0.95) 0%, rgba(10, 30, 16, 0.98) 100%); border: 1.5px solid #f3cf8b; border-radius: 18px; padding: 14px 38px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 15px rgba(243, 207, 139, 0.1); min-width: 190px; margin-bottom: 25px; }
         .sayac-etiket { font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 800; letter-spacing: 3px; color: #d8f3dc; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
@@ -363,7 +302,6 @@
         .telegram-belirgin-link:hover { background: #00a2f2; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6); }
         .footer-copyright { display: block; font-family: 'Cinzel', serif; font-size: 1rem; letter-spacing: 2px; color: var(--text-gold); font-weight: bold; margin-top: 40px; text-transform: uppercase; opacity: 0.8; }
 
-        /* PWA VE IOS MODALLARI */
         .pwa-install-banner { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(120%); width: 92%; max-width: 500px; background: linear-gradient(135deg, rgba(20, 56, 30, 0.98), rgba(8, 26, 14, 0.98)); border: 1.5px solid var(--text-gold); border-radius: 20px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 15px; z-index: 1000; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(243, 207, 139, 0.3); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px); }
         .pwa-install-banner.active { transform: translateX(-50%) translateY(0); }
         .pwa-banner-left { display: flex; align-items: center; gap: 12px; }
@@ -387,16 +325,13 @@
             .duyuru-baslik { font-size: 1.3rem !important; margin-bottom: 12px !important; padding-bottom: 10px !important; }
             .btn-duyuru-kapat { margin-top: 15px !important; padding: 12px !important; font-size: 1rem !important; }
             h1 { font-size: 2.2rem; line-height: 1.3;}
-            
             .progress-info { flex-direction: column !important; justify-content: center !important; gap: 8px !important; text-align: center !important; }
-
             .timeline::after { left: 50%; width: 3px; } 
             .container-box { width: 50%; padding-bottom: 20px; margin-bottom: 10px; }
             .left { padding-right: 15px; padding-left: 0; }
             .right { padding-left: 15px; padding-right: 0; left: 50%; }
             .left::before { right: 2px; width: 13px; } .right::before { left: 2px; width: 13px; }
             .left::after { right: -6px; width: 12px; height: 12px; border-width: 2px; } .right::after { left: -6px; width: 12px; height: 12px; border-width: 2px; }
-
             .content { padding: 18px 15px; }
             .left .content { border-radius: 30px 8px 30px 8px; }
             .right .content { border-radius: 8px 30px 8px 30px; }
@@ -404,7 +339,6 @@
             .content h3 { font-size: 1rem; line-height: 1.3; margin-bottom: 8px; }
             .speaker-text { font-size: 0.8rem; margin-bottom: 5px; }
             .card-footer { font-size: 0.75rem; padding-top: 10px; margin-top: 10px;}
-            
             .welcome-content { width: 95% !important; padding: 30px 15px !important; border-radius: 16px !important; }
             .welcome-title { font-size: 1.35rem !important; margin-bottom: 12px !important; padding-bottom: 10px !important; }
             .arabic-text { font-size: 2rem !important; margin: 12px 0 !important; }
@@ -416,7 +350,6 @@
             .bilgi-baslik-vurgu { font-size: 1.2rem; }
             .zarif-iletisim-alani { font-size: 0.95rem; }
             .telegram-belirgin-link { display: flex; justify-content: center; margin: 15px auto 0; max-width: 240px; }
-            
             .okuma-satir { padding: 14px 15px; }
             .okuma-sol { gap: 12px; }
             .okuma-gun-rozet { width: 40px; height: 40px; font-size: 1.05rem; }
@@ -425,14 +358,7 @@
             .okuma-aralik { font-size: 1.1rem; }
         }
 
-        /* MOBIL ALT NAVIGASYON VE KISISEL ILERLEME */
-        .kisisel-ilerleme-karti {
-            width: 92%; max-width: 580px; margin: 0 auto 24px;
-            background: linear-gradient(145deg, rgba(18, 57, 30, .96), rgba(5, 22, 11, .98));
-            border: 1.5px solid rgba(226, 185, 115, .65); border-radius: 20px;
-            padding: 18px; box-shadow: 0 14px 38px rgba(0,0,0,.65), inset 0 0 22px rgba(226,185,115,.05);
-            position: relative; overflow: hidden;
-        }
+        .kisisel-ilerleme-karti { width: 92%; max-width: 580px; margin: 0 auto 24px; background: linear-gradient(145deg, rgba(18, 57, 30, .96), rgba(5, 22, 11, .98)); border: 1.5px solid rgba(226, 185, 115, .65); border-radius: 20px; padding: 18px; box-shadow: 0 14px 38px rgba(0,0,0,.65), inset 0 0 22px rgba(226,185,115,.05); position: relative; overflow: hidden; }
         .kisisel-ilerleme-karti::before { content:""; position:absolute; inset:5px; border:1px solid rgba(226,185,115,.14); border-radius:15px; pointer-events:none; }
         .ki-ust { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; position:relative; z-index:1; }
         .ki-baslik { display:flex; align-items:center; gap:9px; font-family:'Cinzel',serif; color:#fff; font-size:.88rem; font-weight:800; letter-spacing:.7px; }
@@ -448,16 +374,11 @@
         .ki-toplam { color:#a5d6a7; font-size:.76rem; }
         .ki-devam { border:1px solid var(--text-gold); color:#15381a; background:var(--text-gold); border-radius:22px; padding:8px 13px; font-family:'Cinzel',serif; font-weight:900; font-size:.7rem; cursor:pointer; }
         .mobil-alt-nav { display:none; }
+        
         @media (max-width: 768px) {
             body { padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important; }
             .ana-sekme-container { display:none !important; }
-            .mobil-alt-nav {
-                position:fixed; left:10px; right:10px; bottom:calc(8px + env(safe-area-inset-bottom));
-                height:68px; display:grid; grid-template-columns:repeat(5,1fr); align-items:stretch;
-                background:rgba(7,29,15,.94); border:1px solid rgba(226,185,115,.58); border-radius:20px;
-                box-shadow:0 14px 45px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.05);
-                backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); z-index:1500; padding:5px 4px;
-            }
+            .mobil-alt-nav { position:fixed; left:10px; right:10px; bottom:calc(8px + env(safe-area-inset-bottom)); height:68px; display:grid; grid-template-columns:repeat(5,1fr); align-items:stretch; background:rgba(7,29,15,.94); border:1px solid rgba(226,185,115,.58); border-radius:20px; box-shadow:0 14px 45px rgba(0,0,0,.72), inset 0 1px 0 rgba(255,255,255,.05); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); z-index:1500; padding:5px 4px; }
             .mobil-nav-btn { border:0; background:transparent; color:#b8cdbb; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; border-radius:15px; font-family:'Lora',serif; font-size:.62rem; font-weight:700; cursor:pointer; min-width:0; }
             .mobil-nav-btn i { font-size:1.02rem; }
             .mobil-nav-btn.aktif { color:var(--text-gold); background:linear-gradient(180deg,rgba(226,185,115,.15),rgba(226,185,115,.04)); box-shadow:inset 0 0 0 1px rgba(226,185,115,.12); }
@@ -469,13 +390,8 @@
             .ki-toplam { max-width:55%; line-height:1.35; }
             .OneSignal-bell-container { bottom:calc(86px + env(safe-area-inset-bottom)) !important; }
         }
-        @media (max-width: 370px) {
-            .mobil-alt-nav { left:6px; right:6px; }
-            .mobil-nav-btn { font-size:.56rem; }
-            .ki-baslik { font-size:.78rem; }
-        }
+        @media (max-width: 370px) { .mobil-alt-nav { left:6px; right:6px; } .mobil-nav-btn { font-size:.56rem; } .ki-baslik { font-size:.78rem; } }
 
-        /* UYGULAMA NAVIGASYONU VE DİĞER KOMPAKT STİLLER */
         .okuma-mini-bilgi{max-width:800px;margin:0 auto 18px;padding:11px 15px;border:1px dashed rgba(226,185,115,.3);border-radius:12px;text-align:center;color:#a5d6a7;font-size:.85rem;font-style:italic;background:rgba(0,0,0,.18)}
         .modal-back-btn{display:inline-flex!important;align-items:center;justify-content:center;gap:7px;width:auto!important;height:38px;padding:0 13px!important;border-radius:22px;border:1px solid rgba(243,207,139,.6);background:rgba(5,22,11,.82);font-family:'Cinzel',serif;font-size:.72rem!important;font-weight:900;line-height:1;box-shadow:0 5px 16px rgba(0,0,0,.35)}.modal-back-btn:hover{color:#15381a;background:var(--text-gold);transform:translateX(-2px) rotate(0)!important}.modal-back-btn span{display:inline-block}
         .deneme-footer{justify-content:space-between;gap:8px;min-width:0}.deneme-tur,.deneme-footer .card-status{min-width:0;line-height:1.3}.deneme-tur{color:#ff9e93;font-weight:bold;overflow-wrap:anywhere}
@@ -484,7 +400,20 @@
         
         .modal-back-btn{position:sticky!important;top:-1px!important;left:0!important;right:auto!important;z-index:50!important;margin:-18px 0 10px -18px!important;background:rgba(5,22,11,.98)!important;backdrop-filter:blur(12px);box-shadow:0 7px 22px rgba(0,0,0,.55)!important}
         .ders-materyal-alani{margin:18px 0 8px!important;padding:11px!important}.ders-materyal-baslik{margin-bottom:7px!important;font-size:.72rem!important}.pdf-indir-btn{min-height:42px!important;padding:9px 12px!important;font-size:.68rem!important;line-height:1.25!important;border-radius:22px!important}
-        @media(max-width:768px){.mobil-alt-nav{z-index:12000!important}#lessonModal{z-index:10000!important;padding:8px 8px calc(84px + env(safe-area-inset-bottom))!important}#lessonModal .modal-window{max-height:calc(100dvh - 96px - env(safe-area-inset-bottom))!important;padding:18px 14px 22px!important;align-self:stretch}.modal-back-btn{margin:-8px 0 8px -4px!important;height:37px!important}.modal-header-section{padding-top:2px!important;margin-bottom:16px!important}.modal-footer-actions{display:block!important;padding-top:12px!important;margin-top:12px!important}.btn-complete-toggle{display:flex!important;width:100%!important;min-height:46px!important;padding:10px 12px!important;justify-content:center!important;text-align:center!important;font-size:.76rem!important;line-height:1.25!important;white-space:normal!important}}
+        
+        @media(max-width:768px){
+            .mobil-alt-nav{z-index:12000!important}
+            #lessonModal{z-index:10000!important;padding:8px 8px calc(84px + env(safe-area-inset-bottom))!important}
+            #lessonModal .modal-window{max-height:calc(100dvh - 96px - env(safe-area-inset-bottom))!important;padding:18px 14px 22px!important;align-self:stretch}
+            .modal-back-btn{margin:-8px 0 8px -4px!important;height:37px!important}
+            .modal-header-section{padding-top:2px!important;margin-bottom:16px!important}
+            .modal-footer-actions{display:block!important;padding-top:12px!important;margin-top:12px!important}
+            .btn-complete-toggle{display:flex!important;width:100%!important;min-height:46px!important;padding:10px 12px!important;justify-content:center!important;text-align:center!important;font-size:.76rem!important;line-height:1.25!important;white-space:normal!important}
+        }
+
+        /* ANA SAYFAYA DÖNÜŞ BUTONU CSS */
+        .ana-merkeze-don { display: inline-flex; align-items: center; gap: 8px; background: rgba(226, 185, 115, 0.1); border: 1px solid var(--text-gold); color: var(--text-gold); padding: 8px 16px; border-radius: 20px; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.85rem; font-weight: 700; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .ana-merkeze-don:hover { background: var(--text-gold); color: #15381a; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -502,6 +431,13 @@
 
 <div class="container">
 
+    <!-- ANA SAYFAYA DÖNÜŞ BUTONU -->
+    <div style="text-align: center; margin-bottom: 25px;" class="mobil-ana-ogesi">
+        <a href="https://www.siyerkamplari.com.tr" class="ana-merkeze-don">
+            <i class="fa-solid fa-arrow-left"></i> Tüm Kamplara Dön
+        </a>
+    </div>
+    
     <header id="ana-ekran-ust" class="mobil-ana-ogesi">
         <span class="header-top-tag">BÜYÜKLERİN AYAK İZLERİ</span>
         <h1>İMÂM NEVEVÎ KAMPI</h1>
@@ -510,7 +446,6 @@
     </header>
 
     <div class="aksiyon-alanlari mobil-ana-ogesi">
-        <!-- PDF İNDİRME -->
         <div class="aksiyon-satir">
             <a href="Imam_Nevevi_Kampi_Ders_Notlari.pdf" target="_blank" class="btn-pdf-indir" download>
                 <i class="fa-solid fa-file-pdf"></i> Tüm Ders Notlarını İndir (PDF)
@@ -518,7 +453,6 @@
             <div class="alt-bilgi">Kamp boyunca işlenen tüm notlar tek bir kitapçıkta toplandı.</div>
         </div>
         
-        <!-- TELEGRAM BOT -->
         <div class="aksiyon-satir">
             <a href="https://t.me/nevevikampi_bot" target="_blank" class="btn-telegram-test">
                 <i class="fa-brands fa-telegram"></i> Telegram Test Merkezi
@@ -576,6 +510,7 @@
       </div>
       <div class="ki-alt"><span class="ki-toplam" id="kiToplamMetin">Toplam 0 / 40 adım tamamlandı</span><button class="ki-devam" type="button" onclick="kaldiginYerdenDevamEt()">DEVAM ET <i class="fa-solid fa-chevron-right"></i></button></div>
     </section>
+
     <!-- 1. SEKME: DERSLER -->
     <div id="dersler-alan">
         <div class="timeline" id="timelineContainer"></div>
@@ -612,7 +547,7 @@
             <span class="iletisim-baslik">Sayfa Hakkında</span><br>
             Soru, öneri ve görüşlerinizi iletmek için:<br>
             <a href="https://t.me/Bykim1" target="_blank" class="telegram-belirgin-link">
-                <i class="fa-brands fa-telegram"></i> Telegram'dan Ulaşın
+                <i class="fa-brands fa-telegram"></i> Telegram Üzerinden Mesaj Gönder
             </a> 
         </div>
 
@@ -628,6 +563,7 @@
  <button class="mobil-nav-btn" data-nav="denemeler" onclick="mobilNavigasyon('denemeler')"><i class="fa-solid fa-pen-to-square"></i><span>Sınavlar</span></button>
  <button class="mobil-nav-btn" data-nav="ilerleme" onclick="mobilNavigasyon('ilerleme')"><i class="fa-solid fa-chart-pie"></i><span>İlerlemem</span></button>
 </nav>
+
 <!-- NİYET POPUP (WELCOME MODAL) -->
 <div id="welcomeModal">
     <div class="welcome-content">
@@ -700,7 +636,6 @@
 </div>
 
 <script>
-    // ⚡ DOĞRUDAN GOOGLE APPS SCRIPT URL'İ (VERCEL API KALDIRILDI)
     const GOOGLE_API_URL = "https://script.google.com/macros/s/AKfycbxemdQxu8xlRiBWtfBlOGc5VD3uKKDfweXdPA_pFwHQzTyD0DVP_DLWkUBZ2QHLpCe_/exec";
 
     const lessonsData = [
@@ -770,11 +705,11 @@
         if (sekme==='denemeler') { if(butonlar[1]) butonlar[1].classList.add('aktif'); alanlar.denemeler.style.display='block'; }
         if (sekme==='okuma') { if(butonlar[2]) butonlar[2].classList.add('aktif'); alanlar.okuma.style.display='block'; renderOkumaTakvimi(); }
     }
+    
     function getCompleted() {
         return JSON.parse(localStorage.getItem('nevevi_kamp_completed') || '[]');
     }
 
-    // ⚡ VERCEL API YERİNE DOĞRUDAN APPSHEET/GOOGLE SCRİPT BAĞLANTISI
     async function fetchData() {
         try {
             const zamanDamgasi = new Date().getTime(); 
@@ -1085,7 +1020,6 @@
         sessionStorage.setItem('nevevi_niyet_okundu', 'true');
     }
 
-
     function mobilMi(){ return window.matchMedia('(max-width: 768px)').matches; }
     function mobilAktifButon(view){ document.querySelectorAll('.mobil-nav-btn').forEach(b=>b.classList.toggle('aktif',b.dataset.nav===view)); }
     function mobilEkranGoster(view, push=true, kaydir=true){
@@ -1099,20 +1033,25 @@
         if(push && (!history.state || history.state.view!==view || history.state.neveviModal)) history.pushState({view:view},'',location.href);
         if(kaydir){ if(view==='ilerleme') setTimeout(()=>document.getElementById('kisisel-ilerleme').scrollIntoView({behavior:'smooth',block:'start'}),30); else setTimeout(()=>window.scrollTo({top:mobilKaydirmaKonumlari[gercekView]||0,behavior:'smooth'}),30); }
     }
+    
     function mobilNavigasyon(view){
         const modal=document.getElementById('lessonModal');
         if(modal && modal.classList.contains('active')){ closeLessonModal(); setTimeout(()=>mobilEkranGoster(view,true,true),100); return; }
         if(view===aktifMobilEkran && view!=='ilerleme'){ window.scrollTo({top:0,behavior:'smooth'}); return; }
         mobilEkranGoster(view,true,true);
     }
+    
     function kisiselIlerlemeyiGuncelle(){
         const tamam=getCompleted(), okumaTam=JSON.parse(localStorage.getItem('nevevi_okuma_durumu')||'[]');
         const ders=lessonsData.filter(x=>tamam.includes(x.id)).length, sinav=denemelerData.filter(x=>tamam.includes(x.id)).length, okuma=okumaTakvimiData.filter(x=>okumaTam.includes(x.id)).length, toplam=ders+sinav+okuma, genel=lessonsData.length+denemelerData.length+okumaTakvimiData.length;
         const yaz=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v}, bar=(id,v,t)=>{const e=document.getElementById(id);if(e)e.style.width=Math.round(v/t*100)+'%'};
         yaz('kiToplamYuzde','%'+Math.round(toplam/genel*100)); yaz('kiDersSayim',ders+'/'+lessonsData.length); yaz('kiOkumaSayim',okuma+'/'+okumaTakvimiData.length); yaz('kiSinavSayim',sinav+'/'+denemelerData.length); yaz('kiToplamMetin','Toplam '+toplam+' / '+genel+' adım tamamlandı'); bar('kiDersBar',ders,lessonsData.length); bar('kiOkumaBar',okuma,okumaTakvimiData.length); bar('kiSinavBar',sinav,denemelerData.length);
     }
+    
     function kaldiginYerdenDevamEt(){ const t=getCompleted(),o=JSON.parse(localStorage.getItem('nevevi_okuma_durumu')||'[]'); const a=[{ad:'dersler',oran:lessonsData.filter(x=>t.includes(x.id)).length/lessonsData.length},{ad:'okuma',oran:okumaTakvimiData.filter(x=>o.includes(x.id)).length/okumaTakvimiData.length},{ad:'denemeler',oran:denemelerData.filter(x=>t.includes(x.id)).length/denemelerData.length}].filter(x=>x.oran<1).sort((x,y)=>x.oran-y.oran)[0]; mobilEkranGoster(a?a.ad:'ana',true,true); }
+    
     function dosyaAdiTemizle(metin){ return metin.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ı/g,'i').replace(/[^a-zA-Z0-9ğĞüÜşŞöÖçÇİ -]/g,'').trim().replace(/\s+/g,'-'); }
+    
     function dersPdfIndir(id,btn){
         const lesson=lessonsData.find(x=>x.id===id);
         const source=document.getElementById('pdfDersIcerigi');
@@ -1129,7 +1068,7 @@
 </style></head><body><div class="kapak"><div class="kamp">İMÂM NEVEVÎ KAMPI</div><h1>${esc(lesson.title)}</h1><div class="meta">${esc(lesson.num+' • '+lesson.date)}</div><div class="konusmaci">${esc(lesson.speaker)}</div></div><div class="bolum">DERS NOTU VE ALTIN BİLGİLER</div><article id="icerik">${temizIcerik.innerHTML}</article><div class="altbilgi">İmâm Nevevî Kampı Gönüllü Platformu</div><div class="yardim">Yazdırma ekranında “PDF olarak kaydet” seçeneğini seçin.</div><script>window.addEventListener('load',function(){setTimeout(function(){window.focus();window.print()},500)});<\/script></body></html>`);
         w.document.close();
     }
-    /* PWA VE REHBER MANTIĞI */
+    
     const isIos = () => /iphone|ipad|ipod/.test(window.navigator.userAgent.toLowerCase());
     const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
@@ -1197,25 +1136,18 @@
         }
     }
 
+    // ⚡ İŞTE DÜZELTİLEN VE EKLENEN YENİ SAYAÇ FONKSİYONU
     function canliZiyaretciBaslat() {
         const sayacEl = document.getElementById('canliSayacRakam');
-        
-        // Tarayıcı hafızasına bakar, eğer yoksa senin Vercel'deki gerçek sayın olan 11742'den başlar
         let aktifSayi = parseInt(localStorage.getItem('nevevi_toplam_sayac')) || 11742;
         
-        // İlk girişte sayıyı ekrana bas
         if (sayacEl) sayacEl.innerText = aktifSayi.toLocaleString('tr-TR');
 
-        // Canlı hissi vermek için her 5 saniyede bir kontrol et
         setInterval(() => {
-            // %60 ihtimalle artış yap (her saniye artmasın ki organik ve inandırıcı dursun)
             if (Math.random() > 0.4) {
-                let artis = Math.floor(Math.random() * 3) + 1; // 1 ila 3 arası rastgele kişi ekle
+                let artis = Math.floor(Math.random() * 3) + 1; 
                 aktifSayi += artis;
-                
                 if (sayacEl) sayacEl.innerText = aktifSayi.toLocaleString('tr-TR');
-                
-                // Sayfayı yenilediğinde geriye düşmemesi için son sayıyı tarayıcıya kaydet
                 localStorage.setItem('nevevi_toplam_sayac', aktifSayi);
             }
         }, 5000);
@@ -1227,8 +1159,9 @@
         renderOkumaTakvimi();
         gununHadisiniGoster();
 
-        canliZiyaretciBaslat(); 
-        fetchData();
+        // ⚡ Yeni sayacı burada ateşliyoruz
+        canliZiyaretciBaslat();
+        fetchData(); 
 
         if (sessionStorage.getItem('nevevi_niyet_okundu') === 'true') {
             document.getElementById('welcomeModal').style.display = 'none';
